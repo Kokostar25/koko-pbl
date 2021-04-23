@@ -33,6 +33,7 @@ http://<Public-IP-Address>:80
 ## To make sure your configuration file doesn’t contain syntax errors, run:
 ### sudo apache2ctl configtest
 ## Reload apache2
+### sudp systemctl reload apache2
 ## fill up empty file /var/www/projectlamp
 sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
 

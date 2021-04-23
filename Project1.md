@@ -40,4 +40,21 @@ sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/met
 ![image](https://user-images.githubusercontent.com/70109786/115418247-f61ebd80-a1be-11eb-8927-35966807ba50.png)
 
 ### sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
+## Enable PHP on the website by editing the file and making index.php get served first 
+### sudo vim /etc/apache2/mods-enabled/dir.conf
+*DirectoryIndex index.html index.cgi index.pl index.php index.xhtml index.html
+        #To this:
+        DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.html*
+## Reload Apache2
+### sudo systemctl reload apache2
+## create a PHP test script to confirm that Apache is able to handle and process requests for PHP files.
+## Create a new file named index.php inside your custom web root folder:
+### vim /var/www/projectlamp/index.php
+### <?php
+### phpinfo();
+## Save file, i had to reload apache2, then reload the server 
+![image](https://user-images.githubusercontent.com/70109786/115815921-8591bf80-a3bd-11eb-90d1-d1b4592f4c1f.png)
+
+
+
 

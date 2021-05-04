@@ -11,3 +11,104 @@
 - node -v 
 - npm -v
 ## Application Code Setup
+### Create a new Directory for To-do Project
+- mkdir Todo
+- cd Todo
+- npm init ( to initialize your project, to bring up a new file package.json which will contain information about the application and  dependencies)
+## Install ExpressJS
+- npm install express
+- touch index.js
+## Install the dotenv module
+- npm install dotenv
+- vim index.js
+## open port 5000
+## Open your terminal in the same directory as your index.js file and type:
+- node index.js
+- http://54.85.249.45:5000
+![image](https://user-images.githubusercontent.com/70109786/116919454-e66b9400-ac16-11eb-8321-e203dc703113.png)
+## Routes
+### Our TO-do app needs to perform 3 action
+1. Create a new task
+2. Display list of all tasks
+3. Delete a completed task
+### Create routes folder
+- cd routes
+### Create File api.js
+- touch api.js
+- vim api.js
+### copy code 
+`const express = require ('express');
+const router = express.Router();
+
+router.get('/todos', (req, res, next) => {
+
+});
+
+router.post('/todos', (req, res, next) => {
+
+});
+
+router.delete('/todos/:id', (req, res, next) => {
+
+})
+
+module.exports = router;`
+
+## Models - We use Models to define database schema. We need to install mongoose to create the Schema and Model
+- cd Todo 
+- npm install mongoose
+- mkdir models 
+- cd models 
+- touch todo.js
+- vim todo.js
+### paste code
+'const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+//create schema for todo
+const TodoSchema = new Schema({
+action: {
+type: String,
+required: [true, 'The todo text field is required']
+}
+})
+
+//create model for todo
+const Todo = mongoose.model('todo', TodoSchema);
+
+module.exports = Todo;'
+### Now we need to update our routes directory
+- vim api.js
+### delete previous code %d
+### paste new code  
+`const express = require ('express');
+const router = express.Router();
+const Todo = require('../models/todo');
+
+router.get('/todos', (req, res, next) => {
+
+//this will return all the data, exposing only the id and action field to the client
+Todo.find({}, 'action')
+.then(data => res.json(data))
+.catch(next)
+});
+
+router.post('/todos', (req, res, next) => {
+if(req.body.action){
+Todo.create(req.body)
+.then(data => res.json(data))
+.catch(next)
+}else {
+res.json({
+error: "The input field is empty"
+})
+}
+});
+
+router.delete('/todos/:id', (req, res, next) => {
+Todo.findOneAndDelete({"_id": req.params.id})
+.then(data => res.json(data))
+.catch(next)
+})
+
+module.exports = router;`

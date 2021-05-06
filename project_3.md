@@ -165,3 +165,36 @@ console.log(`Server running on port ${port}`)
 ### start server using 
 - node index.js
 ### Server running on port 5000 Database connected successfully
+## Testing Backend Code without Frontend using RESTful API
+### Use Postman to test our API endpoints. 
+### Create a POST GET and DELETE requests.
+### Post Request
+![image](https://user-images.githubusercontent.com/70109786/117243163-4a9b7d00-adfc-11eb-8fad-c1fbd19b5fce.png)
+
+### Get Request
+![image](https://user-images.githubusercontent.com/70109786/117243193-5c7d2000-adfc-11eb-9a16-235bf49ef7d7.png)
+
+### Delete Request
+![image](https://user-images.githubusercontent.com/70109786/117243239-7454a400-adfc-11eb-8af6-c287e7be2c81.png)
+
+## Step 2 - Frontend creation
+### Time to create a user interface for a Web client (browser) to interact with the application via API, using the create-react-app
+### in Todo Directory run 
+
+### Which will create a todo directory called client, where the react code will be added
+
+### Running a React App
+#### Before testing the react app, there are some dependencies that need to be installed.
+- npm install concurrently --save-dev
+
+### In Todo folder open the package.json file. Change the highlighted part of the below screenshot and replace with the code below.
+` "scripts": {
+"start": "node index.js",
+"start-watch": "nodemon index.js",
+"dev": "concurrently \"npm run start-watch\" \"cd client && npm start\""
+},`
+
+
+
+
+
